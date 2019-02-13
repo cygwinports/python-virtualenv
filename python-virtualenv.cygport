@@ -1,0 +1,17 @@
+inherit python-wheel
+
+NAME="python-virtualenv"
+VERSION=16.4.0
+RELEASE=1
+CATEGORY="Python"
+SUMMARY="Creates isolated Python environments"
+DESCRIPTION="virtualenv is a tool to create isolated Python environments."
+HOMEPAGE="https://virtualenv.pypa.io/"
+
+PATCH_URI="
+	16.4.0-cygwin-libpython.patch
+"
+
+ARCH=noarch
+
+python3_virtualenv_CONTENTS+=" usr/bin/virtualenv"

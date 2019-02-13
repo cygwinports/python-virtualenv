@@ -1,0 +1,25 @@
+--- origsrc/virtualenv-16.4.0/virtualenv.py	2019-02-09 05:14:43.000000000 -0600
++++ src/virtualenv-16.4.0/virtualenv.py	2019-02-13 03:00:38.767179700 -0600
+@@ -1480,6 +1480,10 @@ def install_python(home_dir, lib_dir, in
+                         "python{}{}.dll".format(sys.version_info[0], sys.version_info[1]),
+                         "python{}{}_d.dll".format(sys.version_info[0], sys.version_info[1]),
+                     ),
++                    (
++                        "lib" + PY_VERSION + ABI_FLAGS + ".dll",
++                        "lib" + PY_VERSION + ABI_FLAGS + "_d.dll",
++                    ),
+                 ]
+ 
+             for py_executable_dll, py_executable_dll_d in py_executable_dll_s:
+@@ -1489,9 +1493,11 @@ def install_python(home_dir, lib_dir, in
+                 if os.path.exists(python_dll):
+                     logger.info("Also created %s", py_executable_dll)
+                     shutil.copyfile(python_dll, os.path.join(os.path.dirname(py_executable), py_executable_dll))
++                    make_exe(os.path.join(os.path.dirname(py_executable), py_executable_dll))
+                 if os.path.exists(python_dll_d):
+                     logger.info("Also created %s", py_executable_dll_d)
+                     shutil.copyfile(python_dll_d, python_dll_d_dest)
++                    make_exe(python_dll_d_dest)
+                 elif os.path.exists(python_dll_d_dest):
+                     logger.info("Removed %s as the source does not exist", python_dll_d_dest)
+                     os.unlink(python_dll_d_dest)
