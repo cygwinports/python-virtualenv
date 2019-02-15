@@ -1,0 +1,13 @@
+--- origsrc/virtualenv-16.4.0/virtualenv.py	2019-02-09 05:14:43.000000000 -0600
++++ src/virtualenv-16.4.0/virtualenv.py	2019-02-15 01:35:33.311125000 -0600
+@@ -487,7 +487,9 @@ def virtualenv_support_dirs():
+     """Context manager yielding either [virtualenv_support_dir] or []"""
+ 
+     # normal filesystem installation
+-    if os.path.isdir(join(HERE, "virtualenv_support")):
++    if os.path.isdir('/usr/share/python-wheels'):
++        yield ['/usr/share/python-wheels']
++    elif os.path.isdir(join(HERE, "virtualenv_support")):
+         yield [join(HERE, "virtualenv_support")]
+     elif IS_ZIPAPP:
+         tmpdir = tempfile.mkdtemp()

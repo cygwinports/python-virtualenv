@@ -1,3 +1,4 @@
+PYTHON_WHEEL_VERSIONS="all"
 inherit python-wheel
 
 NAME="python-virtualenv"
@@ -9,9 +10,36 @@ DESCRIPTION="virtualenv is a tool to create isolated Python environments."
 HOMEPAGE="https://virtualenv.pypa.io/"
 
 PATCH_URI="
+	16.4.0-system-wheels.patch
 	16.4.0-cygwin-libpython.patch
 "
 
 ARCH=noarch
 
-python3_virtualenv_CONTENTS+=" usr/bin/virtualenv"
+DISTCLEANFILES="
+	virtualenv_support/pip-*.whl
+	virtualenv_support/setuptools-*.whl
+	virtualenv_support/wheel-*.whl
+"
+
+python27_virtualenv_REQUIRES="python-pip-wheel python-setuptools-wheel python-wheel-wheel"
+python27_virtualenv_CONTENTS+=" usr/bin/virtualenv-2.7"
+python34_virtualenv_REQUIRES="python-pip-wheel python-setuptools-wheel python-wheel-wheel"
+python34_virtualenv_CONTENTS+=" usr/bin/virtualenv-3.4"
+python35_virtualenv_REQUIRES="python-pip-wheel python-setuptools-wheel python-wheel-wheel"
+python35_virtualenv_CONTENTS+=" usr/bin/virtualenv-3.5"
+python36_virtualenv_REQUIRES="python-pip-wheel python-setuptools-wheel python-wheel-wheel"
+python36_virtualenv_CONTENTS+=" usr/bin/virtualenv-3.6"
+python37_virtualenv_REQUIRES="python-pip-wheel python-setuptools-wheel python-wheel-wheel"
+python37_virtualenv_CONTENTS+=" usr/bin/virtualenv-3.7"
+
+src_install() {
+	cd ${B}
+	for v in ${PYTHON_WHEEL_VERSIONS//:/ }
+	do
+		PYTHON_WHEEL_VERSIONS=$v
+		python_wheel_install
+
+		mv ${D}/usr/bin/virtualenv{,-$v}
+	done
+}
