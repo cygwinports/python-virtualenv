@@ -2,7 +2,7 @@ PYTHON_WHEEL_VERSIONS="all"
 inherit python-wheel
 
 NAME="python-virtualenv"
-VERSION=16.4.0
+VERSION=16.4.3
 RELEASE=1
 CATEGORY="Python"
 SUMMARY="Creates isolated Python environments"
@@ -32,6 +32,8 @@ python36_virtualenv_REQUIRES="python-pip-wheel python-setuptools-wheel python-wh
 python36_virtualenv_CONTENTS+=" usr/bin/virtualenv-3.6"
 python37_virtualenv_REQUIRES="python-pip-wheel python-setuptools-wheel python-wheel-wheel"
 python37_virtualenv_CONTENTS+=" usr/bin/virtualenv-3.7"
+python38_virtualenv_REQUIRES="python-pip-wheel python-setuptools-wheel python-wheel-wheel"
+python38_virtualenv_CONTENTS+=" usr/bin/virtualenv-3.8"
 
 src_install() {
 	cd ${B}
