@@ -1,0 +1,11 @@
+--- origsrc/virtualenv-16.6.0/virtualenv.py	2019-05-19 15:42:47.917516900 -0400
++++ src/virtualenv-16.6.0/virtualenv.py	2019-05-26 23:16:16.313316700 -0400
+@@ -1612,6 +1612,8 @@ def install_python(home_dir, lib_dir, in
+         required_symlinks = [py_exe_no_version, py_exe_version_major, py_exe_version_major_minor]
+ 
+         py_executable_base = os.path.basename(py_executable)
++        if py_executable_base.endswith('.exe'):
++            py_executable_base = py_executable_base[:-4]
+ 
+         if py_executable_base in required_symlinks:
+             # Don't try to symlink to yourself.

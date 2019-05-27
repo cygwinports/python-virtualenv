@@ -2,7 +2,7 @@ PYTHON_WHEEL_VERSIONS="all"
 inherit python-wheel
 
 NAME="python-virtualenv"
-VERSION=16.4.3
+VERSION=16.6.0
 RELEASE=1
 CATEGORY="Python"
 SUMMARY="Creates isolated Python environments"
@@ -12,6 +12,7 @@ HOMEPAGE="https://virtualenv.pypa.io/"
 PATCH_URI="
 	16.4.0-system-wheels.patch
 	16.4.0-cygwin-libpython.patch
+	16.6.0-cygwin-exeext.patch
 "
 
 ARCH=noarch
